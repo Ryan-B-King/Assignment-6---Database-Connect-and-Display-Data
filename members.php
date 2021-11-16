@@ -1,7 +1,7 @@
 <?php
 
     // SETUP TO DATABASE
-    $dsn = "mysql:host=localhost;dbname=college_king";
+    $dsn = "mysql:host=localhost;dbname=college";
     $username = "root";
     $password = "";
 
@@ -21,7 +21,7 @@
 
     // SQL STATEMENT
     $sql = "SELECT lname, fname, address, postal_code, phone, email
-            FROM college_king.members
+            FROM college.members
             WHERE city = 'San Diego'
             ORDER BY postal_code, lname";
     $statement = $conn->prepare($sql);
