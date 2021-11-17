@@ -115,15 +115,15 @@
         
                     // HEADER ROW OF TABLE
                     print "\n\r";
-                    print "<table>\n\r";
-                    print "<tr>\n\r";
-                    print "<th>Last Name</th>\n\r";
-                    print "<th>First Name</th>\n\r";
-                    print "<th>Address</th>\n\r";
-                    print "<th>Postal Code</th>\n\r";
-                    print "<th>Phone</th>\n\r";
-                    print "<th id=\"email\">Email</th>\n\r";
-                    print "</tr>\n\r\n\r";
+                    print "\t\t\t\t<table>\n\r";
+                    print "\t\t\t\t\t<tr>\n\r";
+                    print "\t\t\t\t\t\t<th>Last Name</th>\n\r";
+                    print "\t\t\t\t\t\t<th>First Name</th>\n\r";
+                    print "\t\t\t\t\t\t<th>Address</th>\n\r";
+                    print "\t\t\t\t\t\t<th>Postal Code</th>\n\r";
+                    print "\t\t\t\t\t\t<th>Phone</th>\n\r";
+                    print "\t\t\t\t\t\t<th id=\"email\">Email</th>\n\r";
+                    print "\t\t\t\t\t</tr>\n\r\n\r";
         
                     // DISPLAY ROWS FROM RESULTS
                     $rows = $statement->fetchAll();
@@ -131,18 +131,18 @@
                     // BODY OF TABLE
                     foreach ($rows as $row) {
         
-                        print "<tr>\n\r";
-                        print "<td>" . $row["lname"] . "</td>\n\r";
-                        print "<td class=\"lborder\">" . $row["fname"] . "</td>\n\r";
-                        print "<td class=\"lborder\">" . $row["address"] . "</td>\n\r";
-                        print "<td class=\"lborder\">" . $row["postal_code"] . "</td>\n\r";
-                        print "<td class=\"lborder\">" . $row["phone"] . "</td>\n\r";
-                        print "<td class=\"lborder\">" . $row["email"] . "</td>\n\r";
-                        print "</tr>\n\r\n\r";
+                        print "\t\t\t\t\t<tr>\n\r";
+                        print "\t\t\t\t\t\t<td>" . $row["lname"] . "</td>\n\r";
+                        print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["fname"] . "</td>\n\r";
+                        print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["address"] . "</td>\n\r";
+                        print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["postal_code"] . "</td>\n\r";
+                        print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["phone"] . "</td>\n\r";
+                        print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["email"] . "</td>\n\r";
+                        print "\t\t\t\t\t</tr>\n\r\n\r";
                     } // END FOREACH
         
                     // END TABLE
-                    print "</table>\n\r";
+                    print "\t\t\t\t</table>\n\r";
         
                 } else {
         
