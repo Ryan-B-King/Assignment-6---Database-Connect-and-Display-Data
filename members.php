@@ -5,6 +5,9 @@
     $username = "root";
     $password = "";
 
+    // ERROR MESSAGE
+    $msg ="";
+
     // CONNECT TO DATABASE
     $conn = new PDO($dsn, $username, $password);  // CREATE PDO OBJECT
 
@@ -20,20 +23,22 @@
     }
 
     // SQL STATEMENT
-    $sql = "SELECT lname, fname, address, postal_code, phone, email
+    $sql = "SELECT lname, fname, address, city, postal_code, phone, email
             FROM college.members
-            WHERE city = 'San Diego'
+            -- WHERE city = :city
             ORDER BY postal_code, lname";
     $statement = $conn->prepare($sql);
 
     // EXECUTE RESULT SET
     $statement->execute();
 
+    $city = "All Cities";
+
     // ROW COUNT
     $rowcount = $statement->rowCount();
 
     // TEST ROW COUNT
-    // print "Row count is " . $rowcount;
+    print "Row count for Table is " . $rowcount;
 
 ?>
 
@@ -107,7 +112,7 @@
     <body>
         <div>
             <h1>Student Population by City of Residence</h1>
-            <h2><?php print $rowcount . " Students Living in San Diego"?></h2>
+            <h2><?php print "Number of Students Living in " . $city . ": " . $rowcount ?></h2>
             <div id="tborder">
                 <?php
         
@@ -120,6 +125,7 @@
                     print "\t\t\t\t\t\t<th>Last Name</th>\n\r";
                     print "\t\t\t\t\t\t<th>First Name</th>\n\r";
                     print "\t\t\t\t\t\t<th>Address</th>\n\r";
+                    print "\t\t\t\t\t\t<th>City</th>\n\r";
                     print "\t\t\t\t\t\t<th>Postal Code</th>\n\r";
                     print "\t\t\t\t\t\t<th>Phone</th>\n\r";
                     print "\t\t\t\t\t\t<th id=\"email\">Email</th>\n\r";
@@ -135,6 +141,7 @@
                         print "\t\t\t\t\t\t<td>" . $row["lname"] . "</td>\n\r";
                         print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["fname"] . "</td>\n\r";
                         print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["address"] . "</td>\n\r";
+                        print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["city"] . "</td>\n\r";
                         print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["postal_code"] . "</td>\n\r";
                         print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["phone"] . "</td>\n\r";
                         print "\t\t\t\t\t\t<td class=\"lborder\">" . $row["email"] . "</td>\n\r";
