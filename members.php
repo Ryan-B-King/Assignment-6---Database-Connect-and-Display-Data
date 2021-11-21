@@ -24,7 +24,6 @@
     // SQL STATEMENT
     $sql = "SELECT lname, fname, address, city, postal_code, phone, email
             FROM college.members
-            -- WHERE city = :city
             ORDER BY postal_code, lname";
     $statement = $conn->prepare($sql);
 
@@ -39,7 +38,7 @@
     // TEST ROW COUNT
     // print "Row count for Table is " . $rowcount;
 
-    // DROP DOWN LIST SQL2
+    // ***** DROP DOWN LIST SQL2 *****
 
     // SPL STATEMENT SETUP FOR DROP DOWN LIST
     $sql2 = "SELECT DISTINCT city FROM college.members";
@@ -54,7 +53,7 @@
     // JUST TO TEST
     // print "Row count for Select is " . $rowcount2 . "<br>";
 
-    if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST["city"] != "none")) {
+    if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST["city"] != "none") && isset($_POST['cities'])) {
 
         // IF TRUE EXECUTE SQL
         // THIS SQL CODE WILL OVERRIDE THE INISIAL SQL 
@@ -78,18 +77,11 @@
 
     } // END POSTBACK CHECK
 
-    if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST["city"] == "none")) {
+    if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST["city"] == "none") && isset($_POST['cities'])) {
 
         $msg = "Please make a selection.";
 
     } // END POSTBACK CHECK
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['clear'])) {
-
-        
-
-    }
-
 ?>
 
 <!DOCTYPE html><!-- Ryan King -->
@@ -184,28 +176,24 @@
                         print "<p id='msg'>$msg</p>\n\r";
 
                         // BEGIN FORM
-                        print "<form action='" . $_SERVER['PHP_SELF'] . "' method='post'>\n\r";
-                        print "<label for='city'>Select a City:</label>\n\r";
-                        print "<select name='city' id='city'>\n\r";
-                        print "<option value='none'>Make a Selection</option>\n\r";
+                        print "\t\t\t\t<form action='" . $_SERVER['PHP_SELF'] . "' method='post'>\n\r";
+                        print "\t\t\t\t\t<label for='city'>Select a City:</label>\n\r";
+                        print "\t\t\t\t\t<select name='city' id='city'>\n\r";
+                        print "\t\t\t\t\t\t<option value='none'>Make a Selection</option>\n\r";
 
                         // OUTPUT DATA OF EACH ROW AS ASSOCIATIVE ARRAY IN RESULT SET
                         $rows = $statement2->fetchAll();
 
                         // <OPTION> ELEMENT
                         foreach($rows as $row) {
-                            print "<option value='" . $row["city"] . "'>" . $row["city"] . "</option>\n\r";
+                            print "\t\t\t\t\t\t<option value='" . $row["city"] . "'>" . $row["city"] . "</option>\n\r";
                         } // END FOREACH
 
                         // END FORM
-                        print "</select>\n\r";
-                        print "<input type='submit' value='Display Cities'>\n\r";
-                        print "</form>\n\r\n\r";
-
-                        // BEGIN ALL CITIES FORM
-                        print "<form action='" . $_SERVER['PHP_SELF'] . "' method='post'>\n\r";
-                        print "<input type='submit' name='clear' value='Display ALL Cities'>\n\r";
-                        print "</form>\n\r\n\r";
+                        print "\t\t\t\t\t</select>\n\r";
+                        print "\t\t\t\t\t<input type='submit' value='Display Cities' name='cities'>\n\r";
+                        print "\t\t\t\t\t<input type='submit' value='Display ALL Cities'>\n\r";
+                        print "\t\t\t\t</form><br>\n\r";
 
                     } else {
                         // MESSAGE FOR NO RESULTS
